@@ -52,3 +52,6 @@
         </blocks>
     </column>
 </row>
+<row centered>
+    <column cols="8" offset="2"><?php echo $links;?></column>
+</row>

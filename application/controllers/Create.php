@@ -8,6 +8,7 @@ class Create extends CI_Controller {
         parent::__construct();
         $this->load->library('session');
         $this->load->helper(array('form', 'url', 'date'));
+        $this->load->model('bookmodel');
     }
     
     public function index()
@@ -29,7 +30,6 @@ class Create extends CI_Controller {
         if($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
             $data['title'] = 'OOPS';
-            $this->load->model('bookmodel');
             $data['query'] = $this->bookmodel->put_data($session_data['user']);
             if($data['query'] == TRUE) {
                 unset($_POST);

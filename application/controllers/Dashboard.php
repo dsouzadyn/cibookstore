@@ -6,6 +6,7 @@ class Dashboard extends CI_Controller {
         parent::__construct();
         $this->load->library('session');
         $this->load->helper('url');
+        $this->load->model('bookmodel');
     }
     
     public function index()
@@ -14,7 +15,6 @@ class Dashboard extends CI_Controller {
             $data['title'] = 'Dashboard';
             $session_data = $this->session->userdata('logged_in');
             $data['username'] = $session_data['user'];
-            $this->load->model('bookmodel');
             $data['query'] = $this->bookmodel->get_book_by_user($session_data['user']);
             $this->load->view('templates/header', $data);
             $this->load->view('templates/dashboard_navbar');

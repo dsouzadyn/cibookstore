@@ -45,10 +45,14 @@ class Bookmodel extends CI_Model {
             return FALSE; // TODO Clean the f**kin' code, dirty as f**k :')
         }
     }
-    
-    public function get_books()
-    {
+    public function get_row_count() {
         $sql = 'SELECT * FROM books;';
+        $query = $this->db->query($sql);
+        return $query->num_rows();
+    }
+    public function get_books($limit, $start)
+    {
+        $sql = 'SELECT * FROM books LIMIT '.$limit.' OFFSET '.$start.';';
         $query = $this->db->query($sql);
         return $query->result_array();
     }

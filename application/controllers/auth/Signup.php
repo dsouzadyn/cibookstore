@@ -26,7 +26,6 @@ class Signup extends CI_Controller {
                 'password' => $this->input->post('password'),
                 'email_id' => $this->input->post('email')
             );
-            log_message('debug', $this->usermodel->check_user_exists($user_cred['username'], $user_cred['email_id']));
             if(!$this->usermodel->check_user_exists($user_cred['username'], $user_cred['email_id'])) {
                 $this->usermodel->create_user($user_cred);
                 redirect('login');
