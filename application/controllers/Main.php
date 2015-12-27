@@ -26,6 +26,7 @@ class Main extends CI_Controller {
         $data['query'] = $this->bookmodel->get_book_by_category($this->uri->segment(2));
         $data['categories'] = $this->bookmodel->get_categories();
         $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
         $this->load->view('main/index', $data);
         $this->load->view('templates/footer');
     }
@@ -34,7 +35,6 @@ class Main extends CI_Controller {
     {
         $data['title'] = 'BookStore | Home';
         $this->load->model('bookmodel');
-        log_message('debug', 'YOLO'.$this->input->get('b'));
         $data['query'] = $this->bookmodel->search_book($this->input->get('b'));
         $data['categories'] = $this->bookmodel->get_categories();    
         $this->load->view('templates/header', $data);

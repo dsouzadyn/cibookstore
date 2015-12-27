@@ -5,10 +5,12 @@ body {
 nav {
     height: 56px;
     line-height: 57px;
+    background: #fff;
 }
 nav li {
     list-style-type: none;
     margin: 0 16px;
+    display: inline;
 }
 nav li a {
     text-decoration: none;

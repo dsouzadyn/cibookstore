@@ -34,6 +34,14 @@
 </row>
 <row centered>
     <column cols="6">
+        <section>            
+            <label for="price">Price</label>
+            <input type="number" step="0.01" name="price"/>
+        </section>
+    </column>
+</row>
+<row centered>
+    <column cols="6">
         <section>
             <label for="category">Book Category</label>
             <select name="category">

@@ -1,4 +1,36 @@
-<h1>DASHBOARD</h1>
-<h2><?php echo 'Welcome, '.$username;?></h2>
-<a href='<?php echo base_url().'new';?>'>New</a>
-<a href=<?php echo base_url().'logout'?>>Logout</a>
+<row></row>
+<row>
+    <column cols="6" offset="2"><h2><?php echo 'Welcome, '.$username;?></h2></column>
+</row>
+<row centered>
+    <column cols="8">
+    
+<table>
+    <thead>
+        <tr>
+            <th>Book</th>
+            <th>Author</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Status</th>
+        </tr>
+    <tbody>
+        <?php 
+            foreach($query as $book):
+                echo '<tr>';
+                echo '<td>'.$book['book_name'].'</td>';
+                echo '<td>'.$book['book_author'].'</td>';
+                echo '<td>'.$book['book_description'].'</td>';
+                echo '<td>'.$book['book_price'].'</td>';
+                if($book['book_is_available'] == 1) {
+                    echo '<td><span class="label label-success">LIVE</span></td>';
+                } else {
+                    echo '<td><span class="label label-error">UNCONFIRMED</span></td>';
+                }
+                
+            endforeach;
+        ?>
+    </tbody>
+</table>
+    </column>
+</row>
