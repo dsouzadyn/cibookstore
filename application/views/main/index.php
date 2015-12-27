@@ -52,6 +52,10 @@
         </blocks>
     </column>
 </row>
-<row centered>
-    <column cols="8" offset="2"><?php echo $links;?></column>
-</row>
+<?php 
+    if(isset($links)) {
+        echo '<row centered>';
+        echo '<column cols="8" offset="2">'.$links.'</column>';
+        echo '</row>'; 
+    }
+?>
