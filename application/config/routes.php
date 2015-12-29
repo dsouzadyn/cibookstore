@@ -53,8 +53,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'main';
 
 //$route['book/:num'] = 'book/lookup';
+$route['delete/(:num)'] = 'auth/delete';
 $route['search'] = 'main/search';
-$route['category/(:any)'] = 'main/category_lookup';
+
+$route['category/fiction'] = 'category/fiction';
+$route['category/refrence'] = 'category/refrence';
+$route['category/nonfiction'] = 'category/nonfiction';
 
 $route['dashboard'] = 'dashboard';
 

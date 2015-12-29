@@ -35,16 +35,6 @@ class Main extends CI_Controller {
         $this->load->view('templates/footer');
     }
     
-    public function category_lookup()
-    {
-        $data['title'] = 'BookStore | Home';
-        $data['query'] = $this->bookmodel->get_book_by_category($this->uri->segment(2));
-        $data['categories'] = $this->bookmodel->get_categories();
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/navbar');
-        $this->load->view('main/index', $data);
-        $this->load->view('templates/footer');
-    }
     
     public function search()
     {

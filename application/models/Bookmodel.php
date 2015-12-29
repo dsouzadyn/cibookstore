@@ -56,6 +56,12 @@ class Bookmodel extends CI_Model {
         $query = $this->db->query($sql);
         return $query->result_array();
     }
+    public function get_books_by_category($limit, $start, $cat)
+    {
+        $sql = 'SELECT * FROM books WHERE book_category = "'.$cat.'" LIMIT '.$limit.' OFFSET '.$start.';';
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
     public function get_book_by_category($cat)
     {
         $sql = 'SELECT * FROM books WHERE book_category = "'.$cat.'";';
@@ -74,10 +80,16 @@ class Bookmodel extends CI_Model {
         $query = $this->db->query($sql);
         return $query->result_array();
     }
-    public function search_book($b) {
+    public function search_book($b)
+    {
         $sql = 'SELECT * FROM books WHERE book_description LIKE "%'.$b.'%" OR book_name LIKE "%'.$b.'%" OR book_author LIKE "%'.$b.'%";';
         $query = $this->db->query($sql);
         return $query->result_array();
+    }
+    public function delete_book($usr, $id)
+    {
+        $sql = 'DELETE FROM books WHERE id = "'.$id.'" AND created_by = "'.$usr.'";';
+        $query = $this->db->query($sql);
     }
     private function createTimeStamp()
     {

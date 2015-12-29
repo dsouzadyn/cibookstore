@@ -13,6 +13,7 @@
             <th>Description</th>
             <th>Price</th>
             <th>Status</th>
+            <th>Delete</th>
         </tr>
     <tbody>
         <?php 
@@ -27,7 +28,7 @@
                 } else {
                     echo '<td><span class="label label-error">UNCONFIRMED</span></td>';
                 }
-                
+                echo '<td><a href="'.base_url('delete/'.$book['id']).'">Delete</a></td>';
             endforeach;
         ?>
     </tbody>
