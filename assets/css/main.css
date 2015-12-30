@@ -29,11 +29,13 @@ nav li a {
     background: #fff;
 }
 
-
+.product-item img {
+    height: 180px;
+}
 
 .search-bar {
     padding: 16px;
-    padding-top: 56px;
+    padding-top: 64px;
 }
 #display-area {
     margin-top: 16px;

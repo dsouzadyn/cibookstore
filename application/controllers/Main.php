@@ -39,7 +39,22 @@ class Main extends CI_Controller {
     public function search()
     {
         $data['title'] = 'BookStore | Home';
-        $data['query'] = $this->bookmodel->search_book($this->input->get('b'));
+        $config['base_url'] = base_url('main/search');
+        $config['total_rows'] = $this->bookmodel->get_row_count();
+        $config['per_page'] = 3;
+        $config['uri_segment'] = 1;
+
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';
+
+        $config['cur_tag_open'] = "<li><span>";
+        $config['cur_tag_close'] = "</span></li>";
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        
+        $this->pagination->initialize($config);
+        $data['links'] = $this->pagination->create_links();
+        
+        $data['query'] = $this->bookmodel->search_books($config['per_page'], $page ,$this->input->get('b'));
         $data['categories'] = $this->bookmodel->get_categories();    
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');

@@ -7,10 +7,12 @@ class Bookmodel extends CI_Model {
     private $book_author;
     private $book_description;
     private $book_category;
+    private $book_mrp;
     private $book_price;
     private $book_is_available = FALSE;
     private $created_by;
     private $created_on;
+    private $book_key_sentence;
     
     function __construct()
     {
@@ -19,15 +21,20 @@ class Bookmodel extends CI_Model {
     }
     
     
-    public function put_data($username)
+    public function put_data($username, $filepath, $filename)
     {
         $this->book_name = $this->input->post('title');
         $this->book_author = $this->input->post('author');
         $this->book_description = $this->input->post('description');
         $this->book_category = $this->input->post('category');
+        $this->book_mrp = $this->input->post('mrp');
         $this->book_price = $this->input->post('price');
+        $this->book_image = $filepath;
+        $this->image_file = $filename;
         $this->created_by = $username;
         $this->created_on = $this->createTimeStamp();
+        
+        $this->book_key_sentence = $this->book_name.' '.$this->book_author.' '.$this->book_description.' '.$this->book_category;
         
         $data = array(
             'created_on' => $this->created_on,
@@ -36,8 +43,12 @@ class Bookmodel extends CI_Model {
             'book_author' => $this->book_author,
             'book_description' => $this->book_description,
             'book_category' => $this->book_category,
+            'book_mrp' => $this->book_mrp,
             'book_price' => $this->book_price,
-            'book_is_available' => $this->book_is_available
+            'book_image' => $this->book_image,
+            'image_file' => $this->image_file,
+            'book_is_available' => $this->book_is_available,
+            'book_key_sentence' => $this->book_key_sentence
         );
         if($this->db->insert('books', $data)) {
             return TRUE;
@@ -80,16 +91,27 @@ class Bookmodel extends CI_Model {
         $query = $this->db->query($sql);
         return $query->result_array();
     }
+    public function search_books($limit, $start ,$b)
+    {
+        $sql = 'SELECT * FROM books WHERE book_key_sentence LIKE "%'.$b.'%" LIMIT '.$limit.' OFFSET '.$start.';';
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
     public function search_book($b)
     {
-        $sql = 'SELECT * FROM books WHERE book_description LIKE "%'.$b.'%" OR book_name LIKE "%'.$b.'%" OR book_author LIKE "%'.$b.'%";';
+        $sql = 'SELECT * FROM books WHERE book_key_sentence LIKE "%'.$b.'%";';
         $query = $this->db->query($sql);
         return $query->result_array();
     }
     public function delete_book($usr, $id)
     {
+        $sql = 'SELECT image_file FROM books WHERE id = "'.$id.'" AND created_by = "'.$usr.'";';
+        $query = $this->db->query($sql);
+        $row = $query->row();
+        $file_name = $row->image_file;
         $sql = 'DELETE FROM books WHERE id = "'.$id.'" AND created_by = "'.$usr.'";';
         $query = $this->db->query($sql);
+        return $file_name;
     }
     private function createTimeStamp()
     {

@@ -35,6 +35,14 @@
 <row centered>
     <column cols="6">
         <section>            
+            <label for="mrp">MRP</label>
+            <input type="number" step="0.01" name="mrp"/>
+        </section>
+    </column>
+</row>
+<row centered>
+    <column cols="6">
+        <section>            
             <label for="price">Price</label>
             <input type="number" step="0.01" name="price"/>
         </section>
@@ -49,6 +57,14 @@
                 <option value="nonfiction">Non Fiction</option>
                 <option value="refrence">Refrence</option>
             </select>      
+        </section>
+    </column>
+</row>
+<row centered>
+    <column cols="6">
+        <section>            
+            <label for="userfile">Image</label>
+            <input type="file" accept="image/*" name="userfile"/>
         </section>
     </column>
 </row>

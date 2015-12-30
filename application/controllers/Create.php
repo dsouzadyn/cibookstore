@@ -30,13 +30,29 @@ class Create extends CI_Controller {
         if($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
             $data['title'] = 'OOPS';
-            $data['query'] = $this->bookmodel->put_data($session_data['user']);
+            $config = array(
+                'upload_path' => "./uploads/",
+                'allowed_types' => "gif|jpg|png|jpeg",
+                'overwrite' => TRUE,
+                'max_size' => "2048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
+                'max_height' => "1024",
+                'max_width' => "1024"
+            );
+            $this->load->library('upload', $config);
+            $upload_data = "";
+            $data['query'] = FALSE;
+            if($this->upload->do_upload('userfile')) {
+                $upload_data = $this->upload->data();
+                $upload_path = 'uploads/'.$upload_data['file_name'];
+                $data['query'] = $this->bookmodel->put_data($session_data['user'], $upload_path, $upload_data['full_path']);
+            }
+            //$data['query'] = $this->bookmodel->put_data($session_data['user']);
             if($data['query'] == TRUE) {
                 unset($_POST);
                 $data['error'] = 'SUCCESS';
             } else {
                 unset($_POST);
-                $data['error'] = 'FAILURE';
+                $data['error'] = $upload_data;
             }
             $this->load->view('templates/header', $data);
             $this->load->view('new/index', $data);

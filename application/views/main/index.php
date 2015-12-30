@@ -37,9 +37,11 @@
                 if($element['book_is_available'] == 1) {
                     echo '<div class="product-item">';
                     echo '<h4>'.$element['book_name'].'</h4>';
-                    echo '<h4>'.$element['book_author'].'</h4>';
+                    echo '<p>by '.$element['book_author'].'</p>';
+                    echo '<img src="'.base_url($element['book_image']).'"/>';
                     echo '<p>'.$element['book_description'].'</p>';
                     echo '<em>'.$element['book_category'].'</em>';
+                    echo '<br><em><s>Rs.'.$element['book_mrp'].'</s></em>';
                     echo '<br><em>Rs.'.$element['book_price'].'</em>';
                     echo '</div>';   
                 } else {

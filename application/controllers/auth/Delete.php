@@ -14,7 +14,8 @@ class Delete extends CI_Controller {
     {
         if($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
-            $this->bookmodel->delete_book($session_data['user'], $this->uri->segment(2));
+            $file = $this->bookmodel->delete_book($session_data['user'], $this->uri->segment(2));
+            unlink($file);
             redirect('dashboard');
         } else {
             redirect('login');
