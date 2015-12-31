@@ -30,7 +30,7 @@ class Usermodel extends CI_Model { // TODO create a check_user_exits() function
         $sql = "SELECT username,password,email_id FROM users WHERE username = ? LIMIT 1;";
         $query = $this->db->query($sql, array($username));
         $user = $query->result_array();
-        if($user != NULL and $user[0]['username'] === $username) {
+        if($user != NULL and $user[0]['username'] === $username and password_verify($password,$user[0]['password'])) {
             return array(
                 'isValidUser' => TRUE,
                 'session_data' => array(

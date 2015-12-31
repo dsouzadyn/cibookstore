@@ -29,8 +29,11 @@ class Category extends CI_Controller {
         
         $data['query'] = $this->bookmodel->get_books_by_category($config['per_page'],$page,$this->uri->segment(2));
         $data['categories'] = $this->bookmodel->get_categories();
+        
+        $nav['navdata'] = $this->navlinks();
+        
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/navbar');
+        $this->load->view('templates/navbar', $nav);
         $this->load->view('main/index', $data);
         $this->load->view('templates/footer');
     }
@@ -55,8 +58,11 @@ class Category extends CI_Controller {
         
         $data['query'] = $this->bookmodel->get_books_by_category($config['per_page'],$page,$this->uri->segment(2));
         $data['categories'] = $this->bookmodel->get_categories();
+        
+        $nav['navdata'] = $this->navlinks();
+        
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/navbar');
+        $this->load->view('templates/navbar', $nav);
         $this->load->view('main/index', $data);
         $this->load->view('templates/footer');
     }
@@ -82,10 +88,26 @@ class Category extends CI_Controller {
         
         $data['query'] = $this->bookmodel->get_books_by_category($config['per_page'],$page,$this->uri->segment(2));
         $data['categories'] = $this->bookmodel->get_categories();
+        
+        $nav['navdata'] = $this->navlinks();
+        
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/navbar');
+        $this->load->view('templates/navbar', $nav);
         $this->load->view('main/index', $data);
         $this->load->view('templates/footer');
+    }
+    
+    private function navlinks() {
+        return array(
+            array(
+                'link' => base_url('login'),
+                'text' => "Login"
+            ),
+            array(
+                'link' => base_url('signup'),
+                'text' => "Register"
+            )
+        );
     }
     
 }

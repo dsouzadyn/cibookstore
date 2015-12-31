@@ -1,66 +1,43 @@
-<row></row>
-<row centered>
-    <column cols="6"><h6 style="text-align:center;letter-spacing:1.4px;">Sign Up</h6></column>
-</row>
-<row centered>
-    <column cols="8">
-        <?php echo form_open('auth/signup', array('class'=>'forms')); ?>
-        <?php echo $error; ?>
-    </column>
-</row>
-<row centered>
-    <column cols="8">
-        <section>
-            <label for="first_name">First Name</label>
-            <input type="text" name="first_name" required>
-        </section>
-    </column>
-</row>
-<row centered>
-    <column cols="8">
-        <section>
-            <label for="last_name">Last Name</label>
-            <input type="text" name="last_name" required>
-        </section>
-    </column>
-</row>
-<row centered>
-    <column cols="8">
-        <section>
-            <label for="username">Username</label>
-            <input type="text" name="username" required>
-        </section>
-    </column>
-</row>
-<row centered>
-    <column cols="8">
-        <section>
-            <label for="password">Password</label>
-            <input type="password" name="password" required>
-        </section>
-    </column>
-</row>
-
-<row centered>
-    <column cols="8">
-        <section>
-            <label for="cpassword">Confirm Password</label>
-            <input type="password" name="cpassword" required>
-        </section>
-    </column>
-</row>
-<row centered>
-    <column cols="8">
-        <section>
-            <label for="email">Email id</label>
-            <input type="email" name="email"/>
-        </section>
-    </column>
-</row>
-<row centered>
-    <column cols="8">
-        <section>
-            <button style="width:100%;" type="primary" name="submit" value="submit">Sign Up</button>
-        </section>
-    </column>
-</row>
+<div class="row">
+    <?php echo form_open('auth/signup', array('class'=>'forms')); ?>
+        <div class="row">
+            <div class="input-field col s12 m6 offset-m3 l4 offset-l4">
+                <input type="text" name="first_name" class="validate" required>
+                <label for="first_name">First Name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m6 offset-m3 l4 offset-l4">
+                <input type="text" name="last_name" class="validate" required>
+                <label for="last_name">Last Name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m6 offset-m3 l4 offset-l4">
+                <input type="text" name="username" class="validate" required>
+                <label for="username">Username</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m6 offset-m3 l4 offset-l4">
+                <input type="password" name="password" class="validate" required>
+                <label for="password">Password</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m6 offset-m3 l4 offset-l4">
+                <input type="password" name="cpassword" class="validate" required>
+                <label for="cpassword">Confirm Password</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m6 offset-m3 l4 offset-l4">
+                <input type="email" name="email" class="validate" required>
+                <label for="email">Email</label>
+            </div>
+        </div>
+        <div class="row">
+            <button name="submit" type="submit" class="col s12 m6 offset-m3 l4 offset-l4 btn">Create Account</button>
+        </div>
+    </form>
+</div>

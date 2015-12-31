@@ -20,11 +20,7 @@ class Verifylogin extends CI_Controller {
             //$this->load->view('dashboard/index');
             //$this->load->view('templates/footer');
         } else {
-            $data['message'] = 'Invalid Login';
-            $data['title'] = 'Error in Login';
-            $this->load->view('templates/header', $data);
-            $this->load->view('auth/login', $data);
-            $this->load->view('templates/footer');
+            redirect('login');
         }
     }
 }

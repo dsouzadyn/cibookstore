@@ -12,6 +12,7 @@ class Main extends CI_Controller {
     public function index()
     {
         $data['title'] = 'BookStore | Home';
+        $this->load->helper('text');
         $config['base_url'] = base_url('main/index');
         $config['total_rows'] = $this->bookmodel->get_row_count();
         $config['per_page'] = 3;
@@ -29,8 +30,11 @@ class Main extends CI_Controller {
         
         $data['query'] = $this->bookmodel->get_books($config['per_page'], $page);
         $data['categories'] = $this->bookmodel->get_categories();
+        
+        $nav['navdata'] = $this->navlinks(); 
+        
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/navbar');
+        $this->load->view('templates/navbar', $nav);
         $this->load->view('main/index', $data);
         $this->load->view('templates/footer');
     }
@@ -53,13 +57,26 @@ class Main extends CI_Controller {
         
         $this->pagination->initialize($config);
         $data['links'] = $this->pagination->create_links();
-        
+        $nav['navdata'] = $this->navlinks(); 
         $data['query'] = $this->bookmodel->search_books($config['per_page'], $page ,$this->input->get('b'));
         $data['categories'] = $this->bookmodel->get_categories();    
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/navbar');
+        $this->load->view('templates/navbar', $nav);
         $this->load->view('main/index', $data);
         $this->load->view('templates/footer');
+    }
+    
+    private function navlinks() {
+        return array(
+            array(
+                'link' => base_url('login'),
+                'text' => "Login"
+            ),
+            array(
+                'link' => base_url('signup'),
+                'text' => "Register"
+            )
+        );
     }
     
 }
