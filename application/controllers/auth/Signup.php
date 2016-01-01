@@ -12,8 +12,15 @@ class Signup extends CI_Controller {
         $data['error'] = '';
         if(!$this->input->post('submit', FALSE)) {
             $data['title'] = 'Sign Up';
+            $nav['navdata'] = array(
+                array(
+                    'link' => base_url(),
+                    'text' => "Back"
+                )
+            );
             $data['error'] = $this->input->post('submit', FALSE);
             $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar', $nav);
             $this->load->view('auth/signup', $data);
             $this->load->view('templates/footer');
         } else {

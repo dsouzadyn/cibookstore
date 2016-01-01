@@ -1,5 +1,5 @@
 <div class="row">
-    <?php echo form_open('auth/verifylogin', array('class'=>'col s12')); ?>
+    <?php echo form_open('auth/verifylogin', array('class'=>'col s10 offset-s1')); ?>
         <div class="row">
             <div class="input-field col s12 m6 offset-m3 l4 offset-l4">
                 <input type="text" name="username" class="validate"/>

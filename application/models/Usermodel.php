@@ -54,7 +54,7 @@ class Usermodel extends CI_Model { // TODO create a check_user_exits() function
             'last_name' => $this->last_name,
             'username' => $this->user_name,
             'password' => $this->password,
-            'email_id' => $this->email_id
+            'email_id' => $this->email_id,
         );
         if($this->db->insert('users', $data)) {
             return true;

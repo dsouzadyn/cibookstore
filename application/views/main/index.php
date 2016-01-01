@@ -4,7 +4,7 @@
       <div class="col s12 m4 l3"> <!-- Note that "m4 l3" was added -->
           
         <ul class="collection with-header">
-            <li class="collection-header"><h4>Categories</h4></li>
+            <li class="collection-header"><h5>Popular Categories</h5></li>
             <a href="<?php echo base_url();?>" class="collection-item">All</a>
             <?php
                 foreach($categories as $category):
@@ -36,7 +36,8 @@
                     <div class="row card-panel">
                         <div class="input-field">
                             <input placeholder="Type in something..." type="text" name="b" class="validate col l8 offset-l2"/>
-                            <button class="btn waves-effect waves-light col s3 offset-s4">Search<i class="material-icons right">send</i></button>
+                            <button class="btn waves-effect waves-light col s4 l3 offset-s1 offset-l2">Search<i class="material-icons right">send</i></button>
+                            <a href="<?php echo base_url('signup');?>"class="btn amber waves-effect waves-light col s4 l3 offset-s2 offset-l2">Create A Free Ad</a>
                         </div>
                     </div>
                 </form>
@@ -48,24 +49,57 @@
                     if($element['book_is_available'] == 1) {
                         
                         echo '<div class="col s12 m6 l3">';
-                        echo '<div class="card hoverable">';
+                        echo '<div class="card large hoverable">';
                         echo '<div class="card-image">';
                         echo '<img src="'.base_url($element['book_image']).'"/>';
                         echo '<span class="card-title">'.$element['book_name'].'</span>';
                         echo '</div>';
                         echo '<div class="card-content">';
                         echo '<p>'.word_limiter($element['book_description'], 16).'</p>';
-                        echo '<p><div class="chip">'.$element['book_category'].'</div></p>';
+                        if($element['book_category'] != 'other') {
+                            echo '<p><div class="chip">'.$element['book_category'].'</div></p>';    
+                        } else {
+                            echo '<p><div class="chip">'.$element['other_cat'].'</div></p>';    
+                        }
                         echo '<br><em><s>Rs.'.$element['book_mrp'].'</s></em>';
                         echo '<br><em>Rs.'.$element['book_price'].'</em>';
+                        echo '<br>'.$element['contact_email'];
+                        echo '<p><div class="chip">'.strtoupper($element['city']).'</div></p>';
                         echo '</div>';
                         echo '<div class="card-action">';
-                        echo '<a href="#">View</a>';
+                        echo '<button data-target="modal'.$element['id'].'" class="btn modal-trigger">Details</button>';
                         echo '</div>';
                         echo '</div>';
                         echo '</div>';
                         
                         
+                        echo '<div id="modal'.$element['id'].'" class="modal modal-fixed-footer">';
+                        echo '<div class="modal-content">';
+                        echo '<div class="row">';
+                        echo '<div class="col s12 l6">';
+                        echo '<h4>'.$element['book_name'].'</h4>';
+                        echo '<p>'.$element['book_description'].'</p>';
+                        if($element['book_category'] != 'other') {
+                            echo '<p><div class="chip">'.$element['book_category'].'</div></p>';    
+                        } else {
+                            echo '<p><div class="chip">'.$element['other_cat'].'</div></p>';    
+                        }
+                        
+                        echo '<br><em><s>Rs.'.$element['book_mrp'].'</s></em>';
+                        echo '<br><em>Rs.'.$element['book_price'].'</em>';
+                        echo '<br>'.$element['contact_email'];
+                        echo '<br>'.$element['contact_number'];
+                        echo '<p><div class="chip">'.strtoupper($element['city']).'</div></p>';
+                        echo '</div>';
+                        echo '<div class="col s12 l6">';
+                        echo '<img class="materialbox" width="180" src="'.base_url($element['book_image']).'"/>';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '<div class="modal-footer">';
+                        echo '<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>';
+                        echo '</div>';
+                        echo '</div>' ;                     
                         
                         /*echo '<div class="product-item">';
                         echo '<h4>'.$element['book_name'].'</h4>';
@@ -83,25 +117,16 @@
                 echo '</div>';
                 }
             ?>
+          <?php 
+                if(isset($links)) {
+                    echo '<div class="row">';
+                    echo $links;
+                    echo '</div>'; 
+                }
+          ?>
       </div>
 
     </div>
           
 
 
-<row id="display-area" centered>
-    <column cols="2">
-    </column>
-    <column cols="8">
-        <blocks cols="4">
-            
-        </blocks>
-    </column>
-</row>
-<?php 
-    if(isset($links)) {
-        echo '<row centered>';
-        echo '<column cols="8" offset="2">'.$links.'</column>';
-        echo '</row>'; 
-    }
-?>

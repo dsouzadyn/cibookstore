@@ -10,7 +10,7 @@ class Logout extends CI_Controller {
     {
         $data['title'] = 'Logged Out';
         $this->session->unset_userdata('logged_in');
-        session_destroy();
+        $this->session->sess_destroy();
         redirect('main');
         //$this->load->view('templates/header', $data);
         //$this->load->view('auth/login', $data);

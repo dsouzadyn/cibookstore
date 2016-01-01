@@ -1,5 +1,5 @@
 <div class="row">
-    <?php echo form_open('auth/signup', array('class'=>'forms')); ?>
+    <?php echo form_open('auth/signup', array('class'=>'forms col s10 offset-s1')); ?>
         <div class="row">
             <div class="input-field col s12 m6 offset-m3 l4 offset-l4">
                 <input type="text" name="first_name" class="validate" required>

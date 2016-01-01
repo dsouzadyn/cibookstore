@@ -16,13 +16,24 @@ class Main extends CI_Controller {
         $config['base_url'] = base_url('main/index');
         $config['total_rows'] = $this->bookmodel->get_row_count();
         $config['per_page'] = 3;
-        $config['uri_segment'] = 1;
+        $config['uri_segment'] = 3;
 
         $config['full_tag_open'] = '<ul class="pagination">';
         $config['full_tag_close'] = '</ul>';
 
-        $config['cur_tag_open'] = "<li><span>";
-        $config['cur_tag_close'] = "</span></li>";
+        $config['cur_tag_open'] = '<li class="active">';
+        $config['cur_tag_close'] = "</li>";
+        $config['num_tag_open'] = '<li class="waves-effect">';
+        $config['num_tag_close'] = '</li>';
+        
+        $config['prev_link'] = '<i class="material-icons">chevron_left</i>';
+        $config['prev_tag_open'] = '<li class="waves-effect">';
+        $config['prev_tag_close'] = '</li>';
+        
+        $config['next_link'] = '<i class="material-icons">chevron_right</i>';
+        $config['next_tag_open'] = '<li class="waves-effect">';
+        $config['next_tag_close'] = '</li>';
+        
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
         
         $this->pagination->initialize($config);
@@ -43,16 +54,28 @@ class Main extends CI_Controller {
     public function search()
     {
         $data['title'] = 'BookStore | Home';
+        $this->load->helper('text');
         $config['base_url'] = base_url('main/search');
         $config['total_rows'] = $this->bookmodel->get_row_count();
-        $config['per_page'] = 3;
+        $config['per_page'] = 20;
         $config['uri_segment'] = 1;
 
         $config['full_tag_open'] = '<ul class="pagination">';
         $config['full_tag_close'] = '</ul>';
 
-        $config['cur_tag_open'] = "<li><span>";
-        $config['cur_tag_close'] = "</span></li>";
+        $config['cur_tag_open'] = '<li class="active">';
+        $config['cur_tag_close'] = '</li>';
+        $config['num_tag_open'] = '<li class="waves-effect">';
+        $config['num_tag_close'] = '</li>';
+        
+        $config['prev_link'] = '<i class="material-icons">chevron_left</i>';
+        $config['prev_tag_open'] = '<li class="waves-effect">';
+        $config['prev_tag_close'] = '</li>';
+        
+        $config['next_link'] = '<i class="material-icons">chevron_right</i>';
+        $config['next_tag_open'] = '<li class="waves-effect">';
+        $config['next_tag_close'] = '</li>';
+        
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
         
         $this->pagination->initialize($config);

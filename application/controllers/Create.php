@@ -2,13 +2,13 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Create extends CI_Controller {
-    
     function __construct()
     {
         parent::__construct();
         $this->load->library('session');
         $this->load->helper(array('form', 'url', 'date'));
         $this->load->model('bookmodel');
+        
     }
     
     public function index()
@@ -17,6 +17,7 @@ class Create extends CI_Controller {
             $data['title'] = 'BookStore | New Book';
             $data['error'] = '';
             $data['query'] = '';
+            $data['sel_categories'] = $this->getcats();
             // TODO create database to upload
             $this->load->view('templates/header', $data);
             $this->load->view('new/index', $data);
@@ -33,7 +34,7 @@ class Create extends CI_Controller {
             $config = array(
                 'upload_path' => "./uploads/",
                 'allowed_types' => "gif|jpg|png|jpeg",
-                'overwrite' => TRUE,
+                'overwrite' => FALSE,
                 'max_size' => "2048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
                 'max_height' => "1024",
                 'max_width' => "1024"
@@ -44,7 +45,7 @@ class Create extends CI_Controller {
             if($this->upload->do_upload('userfile')) {
                 $upload_data = $this->upload->data();
                 $upload_path = 'uploads/'.$upload_data['file_name'];
-                $data['query'] = $this->bookmodel->put_data($session_data['user'], $upload_path, $upload_data['full_path']);
+                $data['query'] = $this->bookmodel->put_data($session_data['user'], $session_data['email'], $upload_path, $upload_data['full_path']);
             }
             //$data['query'] = $this->bookmodel->put_data($session_data['user']);
             if($data['query'] == TRUE) {
@@ -54,9 +55,43 @@ class Create extends CI_Controller {
                 unset($_POST);
                 $data['error'] = $upload_data;
             }
+            $data['sel_categories'] = $this->getcats();
             $this->load->view('templates/header', $data);
             $this->load->view('new/index', $data);
             $this->load->view('templates/footer');
         }
+        
     }
+    private function getcats() {
+            return array(
+                        array(
+                            'text' => "Fiction",
+                            'value' => "fiction"
+                        ),
+                        array(
+                            'text' => "Non Fiction",
+                            'value' => "nonfiction"
+                        ),
+                        array(
+                            'text' => "Refrence",
+                            'value' => "refrence"
+                        ),
+                
+                        array(
+                            'text' => "Novels",
+                            'value' => "novels"
+                        ),
+                
+                        array(
+                            'text' => "Educational",
+                            'value' => "educational"
+                        ),
+                    
+                        array(
+                            'text' => "Other",
+                            'value' => "other"
+                        ),
+                    );
+    }
+
 }
