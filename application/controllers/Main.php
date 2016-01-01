@@ -15,7 +15,7 @@ class Main extends CI_Controller {
         $this->load->helper('text');
         $config['base_url'] = base_url('main/index');
         $config['total_rows'] = $this->bookmodel->get_row_count();
-        $config['per_page'] = 3;
+        $config['per_page'] = 10;
         $config['uri_segment'] = 3;
 
         $config['full_tag_open'] = '<ul class="pagination">';
@@ -57,7 +57,7 @@ class Main extends CI_Controller {
         $this->load->helper('text');
         $config['base_url'] = base_url('main/search');
         $config['total_rows'] = $this->bookmodel->get_row_count();
-        $config['per_page'] = 20;
+        $config['per_page'] = 10;
         $config['uri_segment'] = 1;
 
         $config['full_tag_open'] = '<ul class="pagination">';

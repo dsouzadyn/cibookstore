@@ -1,4 +1,13 @@
 @import url(https://fonts.googleapis.com/css?family=Indie+Flower);
-.nav-wrapper {
+.nav-wrapper, .tag-line {
     font-family: 'Indie Flower', cursive;
+}
+ body, nav, .page-footer {
+    background: url('img/dark_wood_@2X.png');
+}
+.collection-item, .card-panel, .card, .modal, .card-action {
+    background: url('img/skulls.png');
+}
+form {
+    color: white;
 }

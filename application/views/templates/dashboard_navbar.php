@@ -1,7 +1,7 @@
 <nav class="grey">
     <div class="container">
         <div class="nav-wrapper">
-            <a href="#!" class="brand-logo">BookStore</a>
+            <a href="<?php echo base_url();?>" class="brand-logo">bookkad</a>
             <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <?php

@@ -2,7 +2,6 @@
 <div class="row">
 
       <div class="col s12 m4 l3"> <!-- Note that "m4 l3" was added -->
-          
         <ul class="collection with-header">
             <li class="collection-header"><h5>Popular Categories</h5></li>
             <a href="<?php echo base_url();?>" class="collection-item">All</a>
@@ -97,7 +96,7 @@
                         echo '</div>';
                         echo '</div>';
                         echo '<div class="modal-footer">';
-                        echo '<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>';
+                        echo '<a href="#!" class="modal-action modal-close waves-effect waves-green btn">Close</a>';
                         echo '</div>';
                         echo '</div>' ;                     
                         
