@@ -33,6 +33,7 @@
                 
                 <form method="get" action="<?php echo base_url('search');?>" class="col s12">
                     <div class="row card-panel">
+                        
                         <div class="input-field">
                             <input placeholder="Type in something..." type="text" name="b" class="validate col l8 offset-l2"/>
                             <button class="btn waves-effect waves-light col s4 l3 offset-s1 offset-l2">Search<i class="material-icons right">send</i></button>

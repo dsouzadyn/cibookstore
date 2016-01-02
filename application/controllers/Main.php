@@ -81,8 +81,9 @@ class Main extends CI_Controller {
         $this->pagination->initialize($config);
         $data['links'] = $this->pagination->create_links();
         $nav['navdata'] = $this->navlinks(); 
-        $data['query'] = $this->bookmodel->search_books($config['per_page'], $page ,$this->input->get('b'));
-        $data['categories'] = $this->bookmodel->get_categories();    
+        $data['query'] = $this->bookmodel->search_books($config['per_page'], $page ,$this->input->get('b'), $this->input->get('c'));
+        $data['categories'] = $this->bookmodel->get_categories();
+        
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar', $nav);
         $this->load->view('main/index', $data);

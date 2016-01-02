@@ -9,11 +9,12 @@ class Bookmodel extends CI_Model {
     private $book_category;
     private $book_mrp;
     private $book_price;
-    private $book_is_available = FALSE;
+    private $book_is_available = TRUE;
     private $created_by;
     private $created_on;
     private $book_key_sentence;
     private $contact_email;
+    private $book_is_new;
     
     function __construct()
     {
@@ -39,8 +40,9 @@ class Bookmodel extends CI_Model {
         $this->contact_email = $email;
         $this->contact_number = $this->input->post('number');
         $this->city = $this->input->post('city');
+        $this->book_is_new = ($this->input->post('condition') == 1) ? TRUE : FALSE;
         
-        $this->book_key_sentence = $this->book_name.' '.$this->book_author.' '.$this->book_description.' '.$this->book_category;
+        $this->book_key_sentence = $this->book_name.' '.$this->book_author.' '.$this->book_description.' '.$this->book_category.' '.$this->city;
         
         $data = array(
             'created_on' => $this->created_on,
@@ -59,7 +61,8 @@ class Bookmodel extends CI_Model {
             'book_key_sentence' => $this->book_key_sentence,
             'contact_email' => $this->contact_email,
             'contact_number' => $this->contact_number,
-            'city' => $this->city
+            'city' => $this->city,
+            'book_is_new' => $this->book_is_new
         );
         if($this->db->insert('books', $data)) {
             return TRUE;
@@ -102,9 +105,20 @@ class Bookmodel extends CI_Model {
         $query = $this->db->query($sql);
         return $query->result_array();
     }
-    public function search_books($limit, $start ,$b)
+    public function get_book_cities()
     {
-        $sql = 'SELECT * FROM books WHERE book_key_sentence LIKE "%'.$b.'%" LIMIT '.$limit.' OFFSET '.$start.';';
+        $sql = 'SELECT DISTINCT city FROM books;';
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+    public function search_books($limit, $start ,$b, $c = NULL)
+    {
+        if($c == NULL) {
+            $sql = 'SELECT * FROM books WHERE book_key_sentence LIKE "%'.$b.'%" LIMIT '.$limit.' OFFSET '.$start.';';    
+        } else {
+            $sql = 'SELECT * FROM books WHERE book_key_sentence LIKE "%'.$b.'%" AND WHERE city LIKE "'.$c.'" LIMIT '.$limit.' OFFSET '.$start.';';
+        }
+        
         $query = $this->db->query($sql);
         return $query->result_array();
     }
